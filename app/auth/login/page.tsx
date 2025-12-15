@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Lock } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -39,12 +40,23 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-background p-6">
-      <div className="w-full max-w-sm">
-        <Card>
+    <div className="flex min-h-screen w-full items-center justify-center bg-gradient-to-br from-background to-muted/20 p-6">
+      <div className="w-full max-w-md">
+        {/* Logo Header */}
+        <div className="mb-8 text-center">
+          <Link href="/" className="inline-flex items-center gap-2">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <Lock className="h-6 w-6" />
+            </div>
+          </Link>
+          <h1 className="mt-4 text-2xl font-bold">Welcome to OneLink</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Sign in to manage your profile</p>
+        </div>
+
+        <Card className="border-2">
           <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold">Welcome to OneLink</CardTitle>
-            <CardDescription>Sign in to manage your universal profile</CardDescription>
+            <CardTitle className="text-xl">Sign in</CardTitle>
+            <CardDescription>Enter your credentials to access your account</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
@@ -76,14 +88,21 @@ export default function LoginPage() {
                 {isLoading ? "Signing in..." : "Sign in"}
               </Button>
             </form>
-            <div className="mt-4 text-center text-sm">
+            <div className="mt-6 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <Link href="/auth/sign-up" className="text-primary underline-offset-4 hover:underline">
-                Sign up
+              <Link href="/auth/sign-up" className="font-medium text-primary underline-offset-4 hover:underline">
+                Create one now
               </Link>
             </div>
           </CardContent>
         </Card>
+
+        {/* Back to home */}
+        <div className="mt-4 text-center">
+          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
+            ← Back to home
+          </Link>
+        </div>
       </div>
     </div>
   )
