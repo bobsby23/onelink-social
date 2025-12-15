@@ -1,8 +1,5 @@
 import { createBrowserClient } from "@supabase/ssr"
 
 export function createClient() {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_ONELINKSUPABASE_URL!,
-    process.env.NEXT_PUBLIC_ONELINKSUPABASE_ANON_KEY!,
-  )
+  return createBrowserClient(process.env.SUPABASE_URL!, process.env.SUPABASE_PUBLISHABLE_KEY!)
 }
