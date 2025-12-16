@@ -14,7 +14,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Home, Link2, Users, Settings, LogOut, Menu, UserIcon, ExternalLink, MessageCircle } from "lucide-react"
+import {
+  Home,
+  Link2,
+  Users,
+  Settings,
+  LogOut,
+  Menu,
+  UserIcon,
+  ExternalLink,
+  MessageCircle,
+  Palette,
+} from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { useState } from "react"
@@ -38,9 +49,10 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
 
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: Home },
-    { name: "OneLinks", href: "/dashboard/links", icon: Link2 },
-    { name: "Friends", href: "/dashboard/connections", icon: Users },
+    { name: "Links", href: "/dashboard/links", icon: Link2 },
+    { name: "Connections", href: "/dashboard/connections", icon: Users },
     { name: "Chat", href: "/dashboard/chat", icon: MessageCircle },
+    { name: "Theme", href: "/dashboard/theme", icon: Palette },
     { name: "Profile", href: "/dashboard/profile", icon: Settings },
   ]
 

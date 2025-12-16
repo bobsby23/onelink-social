@@ -13,14 +13,14 @@ export function ConnectionsList({ connections, currentUserId, type }: Connection
     return (
       <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-12 text-center">
         <p className="text-lg font-medium">
-          {type === "accepted" && "No friends yet"}
+          {type === "accepted" && "No connections yet"}
           {type === "pending" && "No pending requests"}
           {type === "sent" && "No sent requests"}
         </p>
         <p className="text-sm text-muted-foreground">
           {type === "accepted" && "Connect with other OneLink users to see their friends-only content"}
-          {type === "pending" && "You have no pending friend requests"}
-          {type === "sent" && "You haven't sent any friend requests"}
+          {type === "pending" && "You have no pending connection requests"}
+          {type === "sent" && "You haven't sent any connection requests"}
         </p>
       </div>
     )
