@@ -51,7 +51,7 @@ export function QuickStats({ userId }: QuickStatsProps) {
 
   const statItems = [
     {
-      label: "Active Links",
+      label: "Active OneLinks",
       value: stats.totalLinks,
       icon: Link2,
     },
@@ -61,7 +61,7 @@ export function QuickStats({ userId }: QuickStatsProps) {
       icon: Eye,
     },
     {
-      label: "Connections",
+      label: "Friends",
       value: stats.totalConnections,
       icon: Users,
     },

@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Shield, Lock, Sparkles, Users, Zap, Eye } from "lucide-react"
+import { Shield, Lock, Users, Zap, Eye } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function HomePage() {
@@ -38,8 +38,8 @@ export default function HomePage() {
           Your links, your privacy, your control
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
-          Build your digital presence with end-to-end encryption, selective sharing, and AI-powered themes. The only
-          link-in-bio platform that puts privacy first.
+          Build your digital presence with end-to-end encryption and selective sharing. The only link-in-bio platform
+          that puts privacy first.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button size="lg" asChild>
@@ -88,11 +88,13 @@ export default function HomePage() {
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold">∞</div>
-            <div className="mt-1 text-sm text-muted-foreground">Links</div>
+            <div className="mt-1 text-sm text-muted-foreground">OneLinks</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold">AI</div>
-            <div className="mt-1 text-sm text-muted-foreground">Powered</div>
+            <div className="text-4xl font-bold">
+              <Users className="inline-block h-10 w-10" />
+            </div>
+            <div className="mt-1 text-sm text-muted-foreground">Friends</div>
           </div>
         </div>
       </section>
@@ -113,7 +115,7 @@ export default function HomePage() {
             </div>
             <h3 className="mt-4 text-xl font-bold">End-to-End Encryption</h3>
             <p className="mt-2 text-muted-foreground">
-              Your private links are encrypted with RSA keys. Only you and your chosen friends can decrypt them.
+              Your private onelinks are encrypted with RSA keys. Only you and your chosen friends can decrypt them.
             </p>
           </Card>
 
@@ -121,19 +123,9 @@ export default function HomePage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
               <Users className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="mt-4 text-xl font-bold">Friend Connections</h3>
+            <h3 className="mt-4 text-xl font-bold">Friends</h3>
             <p className="mt-2 text-muted-foreground">
               Share exclusive content with friends. Control who sees what with granular privacy settings.
-            </p>
-          </Card>
-
-          <Card className="border-2 p-6">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-              <Sparkles className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="mt-4 text-xl font-bold">AI-Powered Themes</h3>
-            <p className="mt-2 text-muted-foreground">
-              Generate beautiful, personalized themes instantly. Let AI create the perfect look for your brand.
             </p>
           </Card>
 
@@ -143,7 +135,7 @@ export default function HomePage() {
             </div>
             <h3 className="mt-4 text-xl font-bold">Granular Visibility</h3>
             <p className="mt-2 text-muted-foreground">
-              Public, friends-only, or private. Choose exactly who can see each link on your profile.
+              Public, friends-only, or private. Choose exactly who can see each onelink on your profile.
             </p>
           </Card>
 
@@ -186,7 +178,7 @@ export default function HomePage() {
               </div>
               <h3 className="mt-4 text-xl font-bold">Create Your Profile</h3>
               <p className="mt-2 text-muted-foreground">
-                Sign up and claim your unique username. Customize your profile with AI-generated themes.
+                Sign up and claim your unique username. Customize your profile and start sharing.
               </p>
             </div>
 
@@ -194,9 +186,9 @@ export default function HomePage() {
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground">
                 2
               </div>
-              <h3 className="mt-4 text-xl font-bold">Add Your Links</h3>
+              <h3 className="mt-4 text-xl font-bold">Add Your OneLinks</h3>
               <p className="mt-2 text-muted-foreground">
-                Add links to your content. Set each link as public, friends-only, or private with encryption.
+                Add onelinks to your content. Set each onelink as public, friends-only, or private with encryption.
               </p>
             </div>
 
@@ -216,7 +208,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="mx-auto w-full max-w-7xl px-6 py-24">
         <Card className="border-2 bg-primary p-12 text-center text-primary-foreground">
-          <h2 className="text-balance text-3xl font-bold md:text-4xl">Ready to take control of your links?</h2>
+          <h2 className="text-balance text-3xl font-bold md:text-4xl">Ready to take control of your onelinks?</h2>
           <p className="mx-auto mt-4 max-w-2xl text-pretty text-primary-foreground/90">
             Join the privacy-first movement. Build your digital presence without surveillance.
           </p>
