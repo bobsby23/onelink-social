@@ -9,9 +9,10 @@ import { Card } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Send, Loader2 } from "lucide-react"
+import { Send, Loader2, ArrowLeft } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { formatDistanceToNow } from "date-fns"
+import { useRouter } from "next/navigation"
 
 interface Friend {
   connectionId: string
@@ -34,8 +35,8 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
   const [isSending, setIsSending] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const supabase = createClient()
+  const router = useRouter()
 
-  // Load messages for selected friend
   useEffect(() => {
     if (!selectedFriend) return
 
@@ -49,7 +50,6 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
 
       if (data) {
         setMessages(data)
-        // Mark messages as read
         await supabase
           .from("messages")
           .update({ read: true })
@@ -62,7 +62,6 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
 
     loadMessages()
 
-    // Subscribe to new messages
     const channel = supabase
       .channel(`messages:${selectedFriend.connectionId}`)
       .on(
@@ -75,7 +74,6 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
         },
         (payload) => {
           setMessages((prev) => [...prev, payload.new as Message])
-          // Mark as read if receiver
           if ((payload.new as Message).receiver_id === currentUserId) {
             supabase
               .from("messages")
@@ -91,7 +89,6 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
     }
   }, [selectedFriend, currentUserId])
 
-  // Auto-scroll to bottom
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" })
@@ -104,15 +101,42 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
 
     setIsSending(true)
     try {
-      await supabase.from("messages").insert({
+      const messageContent = newMessage.trim()
+      const tempId = `temp-${Date.now()}`
+
+      const optimisticMessage: Message = {
+        id: tempId,
         connection_id: selectedFriend.connectionId,
         sender_id: currentUserId,
         receiver_id: selectedFriend.id,
-        content: newMessage.trim(),
+        content: messageContent,
         encrypted: false,
-      })
+        read: false,
+        created_at: new Date().toISOString(),
+      }
 
+      setMessages((prev) => [...prev, optimisticMessage])
       setNewMessage("")
+
+      const { data, error } = await supabase
+        .from("messages")
+        .insert({
+          connection_id: selectedFriend.connectionId,
+          sender_id: currentUserId,
+          receiver_id: selectedFriend.id,
+          content: messageContent,
+          encrypted: false,
+        })
+        .select()
+        .single()
+
+      if (error) {
+        console.error("Failed to send message:", error)
+        setMessages((prev) => prev.filter((m) => m.id !== tempId))
+        setNewMessage(messageContent)
+      } else if (data) {
+        setMessages((prev) => prev.map((m) => (m.id === tempId ? data : m)))
+      }
     } catch (error) {
       console.error("Failed to send message:", error)
     } finally {
@@ -124,7 +148,7 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-center space-y-2">
-          <p className="text-lg font-medium">No connections yet</p>
+          <p className="text-lg font-medium">No friends yet</p>
           <p className="text-sm text-muted-foreground">Add friends to start chatting</p>
         </div>
       </div>
@@ -133,9 +157,11 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
 
   return (
     <div className="flex h-full gap-4">
-      {/* Friends List */}
       <Card className="w-80 flex flex-col">
-        <div className="p-4 border-b">
+        <div className="p-4 border-b flex items-center gap-3">
+          <Button variant="ghost" size="icon" onClick={() => router.push("/dashboard")} className="shrink-0">
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
           <h2 className="text-lg font-semibold">Messages</h2>
         </div>
         <ScrollArea className="flex-1">
@@ -162,10 +188,8 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
         </ScrollArea>
       </Card>
 
-      {/* Chat Area */}
       {selectedFriend ? (
         <Card className="flex-1 flex flex-col">
-          {/* Chat Header */}
           <div className="p-4 border-b flex items-center gap-3">
             <Avatar>
               <AvatarImage src={selectedFriend.avatar_url || undefined} alt={selectedFriend.display_name} />
@@ -177,7 +201,6 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
             </div>
           </div>
 
-          {/* Messages */}
           <ScrollArea className="flex-1 p-4">
             {isLoading ? (
               <div className="flex justify-center py-8">
@@ -209,7 +232,6 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
             )}
           </ScrollArea>
 
-          {/* Message Input */}
           <form onSubmit={handleSendMessage} className="p-4 border-t">
             <div className="flex gap-2">
               <Input
