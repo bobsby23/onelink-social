@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { DashboardShell } from "@/components/dashboard/dashboard-shell"
-import { ProfileCard } from "@/components/dashboard/profile-card"
-import { QuickStats } from "@/components/dashboard/quick-stats"
+import { ThemeGenerator } from "@/components/theme/theme-generator"
+import { ThemePreview } from "@/components/theme/theme-preview"
 
-export default async function DashboardPage() {
+export default async function ThemePage() {
   const supabase = await createClient()
 
   const {
@@ -15,7 +15,6 @@ export default async function DashboardPage() {
     redirect("/auth/login")
   }
 
-  // Fetch user profile
   const { data: profile } = await supabase.from("users").select("*").eq("id", user.id).single()
 
   if (!profile) {
@@ -26,12 +25,14 @@ export default async function DashboardPage() {
     <DashboardShell user={profile}>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Manage your OneLink profile and links</p>
+          <h1 className="text-3xl font-bold">Profile Theme</h1>
+          <p className="text-muted-foreground">Customize your profile appearance with AI-generated themes</p>
         </div>
 
-        <QuickStats userId={user.id} />
-        <ProfileCard profile={profile} />
+        <div className="grid gap-6 lg:grid-cols-2">
+          <ThemeGenerator userId={profile.id} currentTheme={profile.theme_config} />
+          <ThemePreview theme={profile.theme_config} profile={profile} />
+        </div>
       </div>
     </DashboardShell>
   )
