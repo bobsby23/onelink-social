@@ -37,8 +37,8 @@ export default async function ConnectionsPage() {
     <DashboardShell user={profile}>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold">Connections</h1>
-          <p className="text-muted-foreground">Manage your OneLink connections and friend requests</p>
+          <h1 className="text-3xl font-bold">Friends</h1>
+          <p className="text-muted-foreground">Manage your OneLink friends and friend requests</p>
         </div>
 
         <ConnectionsTabs connections={connections || []} currentUserId={user.id} />
