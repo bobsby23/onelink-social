@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Lock } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -53,29 +54,38 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-background p-6">
-      <div className="w-full max-w-sm">
-        <Card>
+    <div className="flex min-h-screen w-full items-center justify-center bg-gradient-to-br from-background to-muted/20 p-6">
+      <div className="w-full max-w-md">
+        {/* Logo Header */}
+        <div className="mb-8 text-center">
+          <Link href="/" className="inline-flex items-center gap-2">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <Lock className="h-6 w-6" />
+            </div>
+          </Link>
+          <h1 className="mt-4 text-2xl font-bold">Create your OneLink</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Join the privacy-first platform</p>
+        </div>
+
+        <Card className="border-2">
           <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold">Create your OneLink</CardTitle>
-            <CardDescription>Set up your universal profile in seconds</CardDescription>
+            <CardTitle className="text-xl">Sign up</CardTitle>
+            <CardDescription>Create your account in seconds</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSignUp} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="nickname">Nickname</Label>
+                <Label htmlFor="nickname">Username</Label>
                 <Input
                   id="nickname"
                   type="text"
                   placeholder="yourname"
                   required
                   value={nickname}
-                  onChange={(e) => setNickname(e.target.value)}
+                  onChange={(e) => setNickname(e.target.value.toLowerCase())}
                   disabled={isLoading}
                 />
-                <p className="text-xs text-muted-foreground">
-                  Your profile will be at onelink.app/u/{nickname || "yourname"}
-                </p>
+                <p className="text-xs text-muted-foreground">Your profile: onelink.app/u/{nickname || "yourname"}</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="displayName">Display Name</Label>
@@ -107,6 +117,7 @@ export default function SignUpPage() {
                   id="password"
                   type="password"
                   required
+                  minLength={6}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
@@ -117,14 +128,21 @@ export default function SignUpPage() {
                 {isLoading ? "Creating account..." : "Create account"}
               </Button>
             </form>
-            <div className="mt-4 text-center text-sm">
+            <div className="mt-6 text-center text-sm">
               Already have an account?{" "}
-              <Link href="/auth/login" className="text-primary underline-offset-4 hover:underline">
+              <Link href="/auth/login" className="font-medium text-primary underline-offset-4 hover:underline">
                 Sign in
               </Link>
             </div>
           </CardContent>
         </Card>
+
+        {/* Back to home */}
+        <div className="mt-4 text-center">
+          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
+            ← Back to home
+          </Link>
+        </div>
       </div>
     </div>
   )

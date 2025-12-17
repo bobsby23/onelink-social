@@ -98,8 +98,8 @@ export function AddLinkDialog({ open, onOpenChange }: AddLinkDialogProps) {
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Add New Link</DialogTitle>
-            <DialogDescription>Create a new link block for your profile</DialogDescription>
+            <DialogTitle>Add New OneLink</DialogTitle>
+            <DialogDescription>Create a new onelink for your profile</DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4 py-4">
@@ -161,7 +161,7 @@ export function AddLinkDialog({ open, onOpenChange }: AddLinkDialogProps) {
               </Select>
               <p className="text-xs text-muted-foreground">
                 {formData.visibility === "public" && "Visible to everyone"}
-                {formData.visibility === "friends" && "Only visible to accepted connections"}
+                {formData.visibility === "friends" && "Only visible to accepted friends"}
                 {formData.visibility === "private" && "Only visible to you"}
               </p>
             </div>
@@ -180,7 +180,7 @@ export function AddLinkDialog({ open, onOpenChange }: AddLinkDialogProps) {
             </Button>
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {isLoading ? "Creating..." : "Create Link"}
+              {isLoading ? "Creating..." : "Create OneLink"}
             </Button>
           </DialogFooter>
         </form>
