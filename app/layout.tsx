@@ -10,7 +10,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "OneLink - Your Privacy-First Link-in-Bio",
-  description: "Privacy-first link-in-bio platform with end-to-end encryption",
+  description: "Privacy-first link-in-bio platform with end-to-end encryption and AI-powered themes",
   generator: "v0.app",
   icons: {
     icon: [

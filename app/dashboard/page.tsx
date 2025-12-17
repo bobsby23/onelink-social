@@ -5,7 +5,7 @@ import { ProfileCard } from "@/components/dashboard/profile-card"
 import { QuickStats } from "@/components/dashboard/quick-stats"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Link2, Users, ArrowRight } from "lucide-react"
+import { Link2, Users, Palette, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export default async function DashboardPage() {
@@ -51,19 +51,19 @@ export default async function DashboardPage() {
         <ProfileCard profile={profile} />
 
         {/* Quick Actions */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-3">
           <Card className="border-2 transition-all hover:border-primary">
             <CardHeader>
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                 <Link2 className="h-5 w-5 text-primary" />
               </div>
-              <CardTitle className="text-lg">Manage OneLinks</CardTitle>
-              <CardDescription>Add, edit, or reorder your onelinks</CardDescription>
+              <CardTitle className="text-lg">Manage Links</CardTitle>
+              <CardDescription>Add, edit, or reorder your link blocks</CardDescription>
             </CardHeader>
             <CardContent>
               <Button variant="ghost" className="w-full justify-between" asChild>
                 <Link href="/dashboard/links">
-                  Go to OneLinks
+                  Go to Links
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -75,13 +75,31 @@ export default async function DashboardPage() {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                 <Users className="h-5 w-5 text-primary" />
               </div>
-              <CardTitle className="text-lg">Friends</CardTitle>
+              <CardTitle className="text-lg">Connections</CardTitle>
               <CardDescription>Connect with friends and share exclusive content</CardDescription>
             </CardHeader>
             <CardContent>
               <Button variant="ghost" className="w-full justify-between" asChild>
                 <Link href="/dashboard/connections">
-                  View Friends
+                  View Connections
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-2 transition-all hover:border-primary">
+            <CardHeader>
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                <Palette className="h-5 w-5 text-primary" />
+              </div>
+              <CardTitle className="text-lg">Customize Theme</CardTitle>
+              <CardDescription>Create AI-powered themes for your profile</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button variant="ghost" className="w-full justify-between" asChild>
+                <Link href="/dashboard/theme">
+                  Customize Theme
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -95,8 +113,8 @@ export default async function DashboardPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle>Recent OneLinks</CardTitle>
-                  <CardDescription>Your most recently added onelinks</CardDescription>
+                  <CardTitle>Recent Links</CardTitle>
+                  <CardDescription>Your most recently added links</CardDescription>
                 </div>
                 <Button variant="outline" size="sm" asChild>
                   <Link href="/dashboard/links">View All</Link>
