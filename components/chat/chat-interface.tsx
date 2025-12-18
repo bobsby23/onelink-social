@@ -124,7 +124,7 @@ export function ChatInterface({ currentUserId, friends }: ChatInterfaceProps) {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-center space-y-2">
-          <p className="text-lg font-medium">No connections yet</p>
+          <p className="text-lg font-medium">No friends yet</p>
           <p className="text-sm text-muted-foreground">Add friends to start chatting</p>
         </div>
       </div>

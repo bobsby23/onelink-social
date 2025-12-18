@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Shield, Lock, Sparkles, Users, Zap, Eye } from "lucide-react"
+import { Shield, Lock, Users, Zap, Eye } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function HomePage() {
@@ -38,8 +38,8 @@ export default function HomePage() {
           Your links, your privacy, your control
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
-          Build your digital presence with end-to-end encryption, selective sharing, and AI-powered themes. The only
-          link-in-bio platform that puts privacy first.
+          Build your digital presence with end-to-end encryption and selective sharing. The only link-in-bio platform
+          that puts privacy first.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button size="lg" asChild>
@@ -91,8 +91,8 @@ export default function HomePage() {
             <div className="mt-1 text-sm text-muted-foreground">Links</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold">AI</div>
-            <div className="mt-1 text-sm text-muted-foreground">Powered</div>
+            <div className="text-4xl font-bold">Fast</div>
+            <div className="mt-1 text-sm text-muted-foreground">Loading</div>
           </div>
         </div>
       </section>
@@ -129,16 +129,6 @@ export default function HomePage() {
 
           <Card className="border-2 p-6">
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-              <Sparkles className="h-6 w-6 text-primary" />
-            </div>
-            <h3 className="mt-4 text-xl font-bold">AI-Powered Themes</h3>
-            <p className="mt-2 text-muted-foreground">
-              Generate beautiful, personalized themes instantly. Let AI create the perfect look for your brand.
-            </p>
-          </Card>
-
-          <Card className="border-2 p-6">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
               <Eye className="h-6 w-6 text-primary" />
             </div>
             <h3 className="mt-4 text-xl font-bold">Granular Visibility</h3>
@@ -166,6 +156,16 @@ export default function HomePage() {
               Your data belongs to you. No selling, no tracking, no surveillance. Complete data ownership.
             </p>
           </Card>
+
+          <Card className="border-2 p-6">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+              <Shield className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="mt-4 text-xl font-bold">Privacy by Design</h3>
+            <p className="mt-2 text-muted-foreground">
+              Built from the ground up with privacy as the foundation. Your security is our priority.
+            </p>
+          </Card>
         </div>
       </section>
 
@@ -186,7 +186,7 @@ export default function HomePage() {
               </div>
               <h3 className="mt-4 text-xl font-bold">Create Your Profile</h3>
               <p className="mt-2 text-muted-foreground">
-                Sign up and claim your unique username. Customize your profile with AI-generated themes.
+                Sign up and claim your unique username. Customize your profile with your own style.
               </p>
             </div>
 

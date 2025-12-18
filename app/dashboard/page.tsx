@@ -5,7 +5,7 @@ import { ProfileCard } from "@/components/dashboard/profile-card"
 import { QuickStats } from "@/components/dashboard/quick-stats"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Link2, Users, Palette, ArrowRight } from "lucide-react"
+import { Link2, Users, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export default async function DashboardPage() {
@@ -51,7 +51,7 @@ export default async function DashboardPage() {
         <ProfileCard profile={profile} />
 
         {/* Quick Actions */}
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2">
           <Card className="border-2 transition-all hover:border-primary">
             <CardHeader>
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
@@ -75,31 +75,13 @@ export default async function DashboardPage() {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                 <Users className="h-5 w-5 text-primary" />
               </div>
-              <CardTitle className="text-lg">Connections</CardTitle>
+              <CardTitle className="text-lg">Friends</CardTitle>
               <CardDescription>Connect with friends and share exclusive content</CardDescription>
             </CardHeader>
             <CardContent>
               <Button variant="ghost" className="w-full justify-between" asChild>
                 <Link href="/dashboard/connections">
-                  View Connections
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="border-2 transition-all hover:border-primary">
-            <CardHeader>
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <Palette className="h-5 w-5 text-primary" />
-              </div>
-              <CardTitle className="text-lg">Customize Theme</CardTitle>
-              <CardDescription>Create AI-powered themes for your profile</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button variant="ghost" className="w-full justify-between" asChild>
-                <Link href="/dashboard/theme">
-                  Customize Theme
+                  View Friends
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
