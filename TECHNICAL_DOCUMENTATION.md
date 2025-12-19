@@ -374,23 +374,15 @@ public.messages
 ### Required Variables
 
 #### Supabase Connection
-- **`NEXT_PUBLIC_ONELINKSUPABASE_URL`** (Client & Server)
+- **`NEXT_PUBLIC_SUPABASE_URL`** (Client & Server)
   - Your Supabase project URL
   - Example: `https://xxxxx.supabase.co`
   - Found in: Supabase Dashboard → Project Settings → API
 
-- **`NEXT_PUBLIC_ONELINKSUPABASE_ANON_KEY`** (Client & Server)
+- **`NEXT_PUBLIC_SUPABASE_ANON_KEY`** (Client & Server)
   - Supabase anonymous/public key
   - Safe to expose to client (RLS protects data)
   - Found in: Supabase Dashboard → Project Settings → API
-
-- **`SUPABASE_URL`** (Server only)
-  - Same as `NEXT_PUBLIC_ONELINKSUPABASE_URL`
-  - Used in middleware and server components
-
-- **`SUPABASE_ANON_KEY`** (Server only)
-  - Same as `NEXT_PUBLIC_ONELINKSUPABASE_ANON_KEY`
-  - Used in middleware and server components
 
 #### Vercel Blob (Optional - for image uploads)
 - **`BLOB_READ_WRITE_TOKEN`** (Server only)
@@ -401,16 +393,16 @@ public.messages
 ### Variable Usage by File
 
 **Browser Client (`lib/supabase/client.ts`):**
-- `NEXT_PUBLIC_ONELINKSUPABASE_URL`
-- `NEXT_PUBLIC_ONELINKSUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 **Server Client (`lib/supabase/server.ts`):**
-- `SUPABASE_URL`
-- `SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 **Middleware (`lib/supabase/proxy.ts`):**
-- `SUPABASE_URL`
-- `SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 **Upload API (`app/api/upload-photo/route.ts`):**
 - `BLOB_READ_WRITE_TOKEN`
@@ -420,6 +412,9 @@ public.messages
 - Never expose service role key to client
 - Blob token is server-only
 - All env vars are validated at runtime
+
+### Migration from Custom Variable Names
+If you previously used `NEXT_PUBLIC_ONELINKSUPABASE_URL` and `NEXT_PUBLIC_ONELINKSUPABASE_ANON_KEY`, simply copy those values to the new standard variable names in your Vercel project settings.
 
 ---
 

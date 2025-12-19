@@ -1,14 +1,3 @@
-/**
- * OneLink Client-Side Encryption Library
- * Implements "Trust No One" E2EE using Web Crypto API
- *
- * Key Features:
- * - RSA-OAEP for asymmetric encryption (key pairs)
- * - AES-GCM for symmetric encryption (content)
- * - All encryption happens client-side before Supabase storage
- */
-
-// Type definitions
 export interface KeyPair {
   publicKey: string // Base64-encoded public key
   privateKey: string // Base64-encoded private key (NEVER sent to server)

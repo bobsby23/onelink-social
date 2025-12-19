@@ -1,5 +1,3 @@
-// Database type definitions for OneLink
-
 export interface User {
   id: string
   email: string
