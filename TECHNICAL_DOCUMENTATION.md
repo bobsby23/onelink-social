@@ -413,9 +413,6 @@ public.messages
 - Blob token is server-only
 - All env vars are validated at runtime
 
-### Migration from Custom Variable Names
-If you previously used `NEXT_PUBLIC_ONELINKSUPABASE_URL` and `NEXT_PUBLIC_ONELINKSUPABASE_ANON_KEY`, simply copy those values to the new standard variable names in your Vercel project settings.
-
 ---
 
 ## 7. API / Data Layer
