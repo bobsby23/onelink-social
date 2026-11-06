@@ -38,7 +38,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
 
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: Home },
-    { name: "Links", href: "/dashboard/links", icon: Link2 },
+    { name: "OneLink", href: "/dashboard/links", icon: Link2 },
     { name: "Friends", href: "/dashboard/connections", icon: Users },
     { name: "Chat", href: "/dashboard/chat", icon: MessageCircle },
     { name: "Profile", href: "/dashboard/profile", icon: Settings },

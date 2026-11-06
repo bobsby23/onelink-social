@@ -32,7 +32,6 @@ export function QuickStats({ userId }: QuickStatsProps) {
 
       const totalClicks = clicksData?.reduce((sum, link) => sum + (link.click_count || 0), 0) || 0
 
-      // Get total connections
       const { count: connectionsCount } = await supabase
         .from("connections")
         .select("*", { count: "exact", head: true })
@@ -61,7 +60,7 @@ export function QuickStats({ userId }: QuickStatsProps) {
       icon: Eye,
     },
     {
-      label: "Connections",
+      label: "Friends",
       value: stats.totalConnections,
       icon: Users,
     },

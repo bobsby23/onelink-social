@@ -17,6 +17,7 @@ import { CSS } from "@dnd-kit/utilities"
 import { createClient } from "@/lib/supabase/client"
 import { useState } from "react"
 import { EditLinkDialog } from "@/components/links/edit-link-dialog"
+import { getIconForLink } from "@/lib/social-icons"
 
 interface LinkCardProps {
   link: LinkBlock
@@ -27,6 +28,8 @@ interface LinkCardProps {
 export function LinkCard({ link, onDelete, onUpdate }: LinkCardProps) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: link.id })
   const [isEditOpen, setIsEditOpen] = useState(false)
+
+  const { icon: LinkIcon, color: iconColor, name: platformName } = getIconForLink(link.url, link.type)
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -72,9 +75,21 @@ export function LinkCard({ link, onDelete, onUpdate }: LinkCardProps) {
             <GripVertical className="h-5 w-5 text-muted-foreground" />
           </button>
 
+          <div
+            className="flex items-center justify-center w-12 h-12 rounded-lg"
+            style={{ backgroundColor: `${iconColor}15`, color: iconColor }}
+          >
+            <LinkIcon className="h-6 w-6" />
+          </div>
+
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <h3 className="font-medium truncate">{link.title}</h3>
+              {platformName !== "Link" && (
+                <Badge variant="secondary" className="text-xs">
+                  {platformName}
+                </Badge>
+              )}
               <Badge variant={visibilityColors[link.visibility]} className="text-xs">
                 {link.visibility}
               </Badge>

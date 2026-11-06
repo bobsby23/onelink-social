@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS messages (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   connection_id UUID NOT NULL REFERENCES connections(id) ON DELETE CASCADE,
   sender_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  receiver_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  receiver_id UUID NOT NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   content TEXT NOT NULL,
   encrypted BOOLEAN DEFAULT FALSE,
   read BOOLEAN DEFAULT FALSE,

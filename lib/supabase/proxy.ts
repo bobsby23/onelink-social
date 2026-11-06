@@ -1,28 +1,41 @@
 import { createServerClient } from "@supabase/ssr"
-import type { NextRequest, NextResponse } from "next/server"
-import type { Database } from "@/lib/types/database"
+import { NextResponse, type NextRequest } from "next/server"
 
-export async function updateSession(request: NextRequest, response: NextResponse) {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_ONELINKSUPABASE_URL!
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://lvfohmsqcpcxndrtvneh.supabase.co"
+const supabaseAnonKey =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2Zm9obXNxY3BjeG5kcnR2bmVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU3MTAwODMsImV4cCI6MjA4MTI4NjA4M30.mm39ZcHyf-4JL5J4rWjdbENlrh8r5NWMKzdm3sUF-lI"
 
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_ONELINKSUPABASE_ANON_KEY!
+export async function updateSession(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({
+    request,
+  })
 
-  const supabase = createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
+  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {
-        return request.cookies.getAll().map((cookie) => ({
-          name: cookie.name,
-          value: cookie.value,
-        }))
+        return request.cookies.getAll()
       },
       setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
-        cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options))
+        cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+        supabaseResponse = NextResponse.next({
+          request,
+        })
+        cookiesToSet.forEach(({ name, value, options }) => supabaseResponse.cookies.set(name, value, options))
       },
     },
   })
 
-  await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-  return response
+  // Protect /dashboard routes
+  if (request.nextUrl.pathname.startsWith("/dashboard") && !user) {
+    const url = request.nextUrl.clone()
+    url.pathname = "/auth/login"
+    return NextResponse.redirect(url)
+  }
+
+  return supabaseResponse
 }

@@ -33,7 +33,7 @@ export default async function LinksPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">My Links</h1>
+            <h1 className="text-3xl font-bold">My OneLink</h1>
             <p className="text-muted-foreground">Manage your link blocks and visibility</p>
           </div>
           <AddLinkButton />
