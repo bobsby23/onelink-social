@@ -1,5 +1,9 @@
 // Database type definitions for OneLink
 
+// The generated Supabase schema types are not checked into this repository yet.
+// Keep the client generic until they are generated from the live schema.
+export type Database = any
+
 export interface User {
   id: string
   email: string

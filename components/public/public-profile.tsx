@@ -12,9 +12,10 @@ interface PublicProfileProps {
   profile: User
   links: LinkBlock[]
   isOwner: boolean
+  demo?: boolean
 }
 
-export function PublicProfile({ profile, links, isOwner }: PublicProfileProps) {
+export function PublicProfile({ profile, links, isOwner, demo = false }: PublicProfileProps) {
   const theme = profile.theme_config || {}
   const hasTheme = Object.keys(theme).length > 0
 
@@ -36,11 +37,11 @@ export function PublicProfile({ profile, links, isOwner }: PublicProfileProps) {
   const handleLinkClick = async (linkId: string, url: string | null) => {
     if (!url) return
 
-    // Increment click count
-    const supabase = createClient()
-    await supabase.rpc("increment_link_clicks", { link_id: linkId })
+    if (!demo) {
+      const supabase = createClient()
+      await supabase.rpc("increment_link_clicks", { link_id: linkId })
+    }
 
-    // Open link
     window.open(url, "_blank", "noopener,noreferrer")
   }
 
