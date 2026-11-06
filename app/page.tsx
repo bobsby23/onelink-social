@@ -46,7 +46,7 @@ export default function HomePage() {
             <Link href="/auth/sign-up">Start Building Free</Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <Link href="#features">Explore Features</Link>
+            <Link href="/demo-profile">See a demo profile</Link>
           </Button>
         </div>
 
